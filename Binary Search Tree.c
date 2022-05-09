@@ -31,6 +31,7 @@ int main()
 	Node* ptr = NULL;	
 
 	do{
+		printf("[----- [박성준] [2021040026] -----]\n");
 		printf("\n\n");
 		printf("----------------------------------------------------------------\n");
 		printf("                   Binary Search Tree #1                        \n");
@@ -308,3 +309,22 @@ void freeNode(Node* ptr)
 		free(ptr);
 	}
 }
+//이진탐색 프리
+int freeBST(Node* head)
+{
+    //처음일경우
+	if(head->left == head)
+	{
+		free(head);
+		return 1;
+	}
+
+    //처음 값 가져오기
+	Node* p = head->left;
+    //p 프리노드
+	freeNode(p);
+    //헤드 프리
+	free(head);
+	return 1;
+}
+
