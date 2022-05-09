@@ -255,3 +255,56 @@ int deleteLeafNode(Node* head, int key)
 
 	return 1;
 }
+//재귀로 노드찾기 
+Node* searchRecursive(Node* ptr, int key)
+{
+	//ptr이 비어있으면
+    if(ptr == NULL)
+        //리턴
+		return NULL;
+    //재귀함수이용
+	if(ptr->key < key)
+		ptr = searchRecursive(ptr->right, key);
+    //재귀함수이용
+	else if(ptr->key > key)
+		ptr = searchRecursive(ptr->left, key);
+
+	//찾았을 때, 해당 주소 리턴
+	return ptr;
+
+}
+
+//Iterative방식으로 노드찾기
+Node* searchIterative(Node* head, int key)
+{
+	//처음 설정
+	Node* ptr = head->left;
+
+    //널이 아닐때까지 반복
+	while(ptr != NULL)
+	{
+        //맞으면
+		if(ptr->key == key)
+            //주소 리턴
+			return ptr;
+        //ptr 이동
+		if(ptr->key < key) 
+            ptr = ptr->right;
+		else
+			ptr = ptr->left;
+	}
+    //없으면 널 
+	return NULL;
+}
+
+//노드 프리 
+void freeNode(Node* ptr)
+{
+    //ptr있으면
+	if(ptr) {
+        //재귀함수로 노드 프리
+		freeNode(ptr->left);
+		freeNode(ptr->right);
+		free(ptr);
+	}
+}
